@@ -1,8 +1,4 @@
-:BP: BridgePoint
-:tm1638boad: TM1638ボード
-:sectnums:
-
-= {raspi} と {:tm1638boad} で動かす {BP} の GPS_Watch
+= Raspberry PiとTM1638ボードで動かす BridgePointのGPS Watch
 
 このリポジトリにあるのは、 BridgePoint にサンプルとして付属している GPS_Watch プロジェクトをアレンジしたものです。
 
@@ -10,7 +6,8 @@
 
 * Raspberry Pi 本体
 -- ここでは、Raspberry Pi 3 Model B+を使用
-* TM1638 8ビット LEDデジタルチューブ 電子モジュール（または同等品）
+* TM1638ボード（または同等品）
+-- 「TM1638 8ビット LEDデジタルチューブ 電子モジュール」といった商品名で販売している。
 -- ネットで1枚数百円から1000円位で購入可能。
 * BridePoint
 -- オープンソースのxtUMLモデリングツール。
