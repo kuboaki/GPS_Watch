@@ -41,6 +41,7 @@ Raspberry Pi  と TM1638ボード の接続の詳細図を <<connection_raspi_tm
 
 [[connection_raspi_tm1638_02]]
 .Raspberry Pi  と TM1638ボード の接続（詳細）
+
 image::connection_raspi_tm1638_02.png[connection_raspi_tm1638_02,{three-quarters-width}]
 
 接続が済んだら、もう一度確認しておきましょう。
