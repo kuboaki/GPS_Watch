@@ -48,9 +48,15 @@ image::connection_raspi_tm1638_02.png[connection_raspi_tm1638_02,{three-quarters
 
 === TM1638ボード用ライブラリのインストール
 
-=== GPS Watchプログラムのビルド
+（あとで書く）
 
-=== 動作確認
+=== GPS WatchプログラムをRaspberry Pi上でビルドする
+
+（あとで書く）
+
+=== 動作を確認する
+
+（あとで書く）
 
 === 動作している様子
 
