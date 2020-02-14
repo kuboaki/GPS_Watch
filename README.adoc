@@ -1,0 +1,84 @@
+:BP: BridgePoint
+:tm1638boad: TM1638ボード
+:sectnums:
+
+= {raspi} と {:tm1638boad} で動かす {BP} の GPS_Watch
+
+このリポジトリにあるのは、 BridgePoint にサンプルとして付属している GPS_Watch プロジェクトをアレンジしたものです。
+
+== 必要なもの
+
+* Raspberry Pi 本体
+-- ここでは、Raspberry Pi 3 Model B+を使用
+* TM1638 8ビット LEDデジタルチューブ 電子モジュール（または同等品）
+-- ネットで1枚数百円から1000円位で購入可能。
+* BridePoint
+-- オープンソースのxtUMLモデリングツール。
+-- GPS Watchのサンプルを作るのに必要。
+-- また、モデルを編集してコードを再生成したい場合に必要。
+* JavaをインストールしたPC
+-- 動作させたGPS Watchを、PC上で動いているGUIと連携させるために必要。
+
+== 利用方法
+
+=== Raspberry PiとTM1638ボードの接続
+
+入手した {tm1638boad} を、{raspi} に接続します。
+
+{raspi} と {tm1638boad} の接続ポートの対応は <<connection_raspi_tm1638_03>> のようになります。
+
+[[connection_raspi_tm1638_03]]
+.接続ポートの対応表
+[%autowidth, cols=">1,<1",options="header"]
+|===
+| {raspi}     | {tm1638boad}
+| +3.3V（1）  | VCC
+| GND（6）    | GND
+| GPIO6（31） | STB
+| GPIO13（33）| CLK
+| GPIO19（35）| DIO
+
+|===
+
+{raspi} と {tm1638boad} の接続の詳細図を <<connection_raspi_tm1638_02>> に示します。
+
+[[connection_raspi_tm1638_02]]
+.{raspi} と {tm1638boad} の接続（詳細）
+image::connection_raspi_tm1638_02.png[connection_raspi_tm1638_02,{three-quarters-width}]
+
+接続が済んだら、もう一度確認しておきましょう。
+
+
+=== TM1638ボード用ライブラリのインストール
+
+=== GPS Watchプログラムのビルド
+
+=== 動作確認
+
+=== 動作している様子
+
+このシステムが動作する様子は YouTube にアップしてあります。
+
+BridgePointのサンプルのGPS Watchを動かしてみた:: {BP} のサンプルの GPS Watch を動かした動画:: https://youtu.be/IaVM7KjwQ9w.
+BridgePointで生成したコードを基板をつないだRaspberry Pi で動かして連動させてみた::  GPS Watch が {raspi} と {tm1638boad} の組み合わせ動作している様子 +
+https://youtu.be/kNXow7kltDM.
+
+== 謝辞
+
+なお、この章で紹介したシステムは、文部科学省が平成29年度に提示した「成長分野を支える情報技術人材の育成拠点の形成（enPiT-Pro）」に早稲田大学が代表校として申請し採択された「スマートエスイー : スマートシステム＆サービス技術の産学連携イノベーティブ人材育成」^<<SMART-SE>>^ の講義「モデル駆動開発」の演習で用いたものです。関係者各位に謝意を表します。
+
+これまで {BP} の開発、販売、コミュニティ支えてきた全てのみなさんに感謝します。とりわけ、 Levi Starrett氏には、スマートエスイーで {raspi} を使うにあたって、 xtUML Days 2018 ^<<XTUML2018>>^ での発表資料 ^<<LAVI-PDF>>^ , ^<<LAVI-V>>^ を利用することに快諾いただきました。一層の謝意を表します。
+
+== 関連資料
+
+- [[[XTUML]]] Executable UML. Wikipedia. +
+https://en.wikipedia.org/wiki/Executable_UML.
+- [[[XTUMLORG]]] xtUML.org -- eXecutable Translatable UML with BridgePoint. https://xtuml.org/.
+- [[[BPINST]]] 久保秋. BridgePointのインストール手順. Qiita. http://bit.ly/31oBDl2.
+- [[[ONEFACT]]] One Fact Inc. http://onefact.net/.
+- [[[XTUML2018]]] xtUML Days 2018 is co-located with MODELS. +
+https://xtuml.org/xtuml-days-2018-copenhagen/
+- [[[LAVI-PDF]]] Starrett, Levi. 1 Application 3 Dialects 5+ Architectures, Platform independence with BridgePoint. +
+xtUML Days 2018. https://xtuml.org/wp-content/uploads/2018/10/1-3-5.pdf.
+- [[[LAVI-V]]] Starrett, Levi. GPS Watch multi-platform demo.  +
+https://www.youtube.com/watch?v=TLFNod4Qvnw.
