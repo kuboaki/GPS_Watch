@@ -5,30 +5,30 @@
 == 必要なもの
 
 * Raspberry Pi 本体
--- ここでは、Raspberry Pi 3 Model B+を使用
+** ここでは、Raspberry Pi 3 Model B+を使用
 * TM1638ボード（または同等品）
--- 「TM1638 8ビット LEDデジタルチューブ 電子モジュール」といった商品名で販売している。
--- ネットで1枚数百円から1000円位で購入可能。
+** 「TM1638 8ビット LEDデジタルチューブ 電子モジュール」といった商品名で販売している。
+** ネットで1枚数百円から1000円位で購入可能。
 * BridePoint
--- オープンソースのxtUMLモデリングツール。
--- GPS Watchのサンプルを作るのに必要。
--- また、モデルを編集してコードを再生成したい場合に必要。
+*** オープンソースのxtUMLモデリングツール。
+** GPS Watchのサンプルを作るのに必要。
+** また、モデルを編集してコードを再生成したい場合に必要。
 * JavaをインストールしたPC
--- 動作させたGPS Watchを、PC上で動いているGUIと連携させるために必要。
+** 動作させたGPS Watchを、PC上で動いているGUIと連携させるために必要。
 
 == 利用方法
 
 === Raspberry PiとTM1638ボードの接続
 
-入手した {tm1638boad} を、{raspi} に接続します。
+入手した TM1638ボード を、Raspberry Pi  に接続します。
 
-{raspi} と {tm1638boad} の接続ポートの対応は <<connection_raspi_tm1638_03>> のようになります。
+Raspberry Pi  と TM1638ボード の接続ポートの対応は <<connection_raspi_tm1638_03>> のようになります。
 
 [[connection_raspi_tm1638_03]]
 .接続ポートの対応表
 [%autowidth, cols=">1,<1",options="header"]
 |===
-| {raspi}     | {tm1638boad}
+| Raspberry Pi      | TM1638ボード
 | +3.3V（1）  | VCC
 | GND（6）    | GND
 | GPIO6（31） | STB
@@ -37,10 +37,10 @@
 
 |===
 
-{raspi} と {tm1638boad} の接続の詳細図を <<connection_raspi_tm1638_02>> に示します。
+Raspberry Pi  と TM1638ボード の接続の詳細図を <<connection_raspi_tm1638_02>> に示します。
 
 [[connection_raspi_tm1638_02]]
-.{raspi} と {tm1638boad} の接続（詳細）
+.Raspberry Pi  と TM1638ボード の接続（詳細）
 image::connection_raspi_tm1638_02.png[connection_raspi_tm1638_02,{three-quarters-width}]
 
 接続が済んだら、もう一度確認しておきましょう。
@@ -56,15 +56,16 @@ image::connection_raspi_tm1638_02.png[connection_raspi_tm1638_02,{three-quarters
 
 このシステムが動作する様子は YouTube にアップしてあります。
 
-BridgePointのサンプルのGPS Watchを動かしてみた:: {BP} のサンプルの GPS Watch を動かした動画:: https://youtu.be/IaVM7KjwQ9w.
-BridgePointで生成したコードを基板をつないだRaspberry Pi で動かして連動させてみた::  GPS Watch が {raspi} と {tm1638boad} の組み合わせ動作している様子 +
-https://youtu.be/kNXow7kltDM.
+BridgePointのサンプルのGPS Watchを動かしてみた:: BeridgePointのサンプルの GPS Watch を動かした動画。 +
+https://youtu.be/IaVM7KjwQ9w
+BridgePointで生成したコードを基板をつないだRaspberry Pi で動かして連動させてみた::  GPS Watch が Raspberry Pi  と TM1638ボード の組み合わせ動作している様子。 +
+https://youtu.be/kNXow7kltDM
 
 == 謝辞
 
 なお、この章で紹介したシステムは、文部科学省が平成29年度に提示した「成長分野を支える情報技術人材の育成拠点の形成（enPiT-Pro）」に早稲田大学が代表校として申請し採択された「スマートエスイー : スマートシステム＆サービス技術の産学連携イノベーティブ人材育成」^<<SMART-SE>>^ の講義「モデル駆動開発」の演習で用いたものです。関係者各位に謝意を表します。
 
-これまで {BP} の開発、販売、コミュニティ支えてきた全てのみなさんに感謝します。とりわけ、 Levi Starrett氏には、スマートエスイーで {raspi} を使うにあたって、 xtUML Days 2018 ^<<XTUML2018>>^ での発表資料 ^<<LAVI-PDF>>^ , ^<<LAVI-V>>^ を利用することに快諾いただきました。一層の謝意を表します。
+これまで BeridgePoint の開発、販売、コミュニティ支えてきた全てのみなさんに感謝します。とりわけ、 Levi Starrett氏には、スマートエスイーで Raspberry Pi  を使うにあたって、 xtUML Days 2018 ^<<XTUML2018>>^ での発表資料 ^<<LAVI-PDF>>^ , ^<<LAVI-V>>^ を利用することに快諾いただきました。一層の謝意を表します。
 
 == 関連資料
 
