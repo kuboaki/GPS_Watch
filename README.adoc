@@ -65,7 +65,7 @@ image::connection_raspi_tm1638_02.png[connection_raspi_tm1638_02,{three-quarters
 
 BridgePointのサンプルのGPS Watchを動かしてみた:: BeridgePointのサンプルの GPS Watch を動かした動画。 +
 https://youtu.be/IaVM7KjwQ9w
-BridgePointで生成したコードを基板をつないだRaspberry Pi で動かして連動させてみた::  GPS Watch が Raspberry Pi  と TM1638ボード の組み合わせ動作している様子。 +
+BridgePointで生成したコードをtm1638ボードをつないだRaspberry Piで動かしてみた::  GPS Watch が Raspberry Pi  と TM1638ボード の組み合わせ動作している様子。 +
 https://youtu.be/kNXow7kltDM
 
 == 謝辞
