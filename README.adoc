@@ -2,7 +2,13 @@
 :imagesdir: images
 :souecesdir: src
 
-include::image_size_matter.adoc[]
+:twoinches: width='360'
+:full-width: width='100%'
+:three-quarters-width: width='75%'
+:half-width: width='50%'
+:half-size:
+:thumbnail: width='60'
+
 
 = Raspberry PiとTM1638ボードで動かす BridgePointのGPS Watch
 
