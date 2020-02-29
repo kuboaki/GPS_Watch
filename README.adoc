@@ -1,17 +1,35 @@
+
+:imagesdir: images
+:souecesdir: src
+
+include::image_size_matter.adoc[]
+
 = Raspberry PiとTM1638ボードで動かす BridgePointのGPS Watch
 
-このリポジトリにあるのは、 BridgePoint にサンプルとして付属している GPS_Watch プロジェクトをアレンジしたものです。
+BridgePoint にサンプルとして付属している GPS_Watch プロジェクトを、TM1638ボードを接続した Raspberry Pi で動かすためにアレンジしました。
 
-詳細な実験手順は、『Raspberry Pi もっと食べたいレシピ集（Raspberry Pi もくもく会レシピ集シリーズ Vol. 2）』の 第8章「UMLを使って Raspberry Pi アプリを作る」で説明しています。
+== 関連する記事や講義について
 
+モデルからこのリポジトリにあるソース・コードを生成し、 Raspberry Piで動作させるまでの詳しい手順は、『 https://raspimoku.gitlab.io/recipebook02/[Raspberry Pi もっと食べたいレシピ集] 』の 第8章「UMLを使って Raspberry Pi アプリを作る」で紹介しています。
 
-Raspberry Pi もくもく会レシピ集シリーズのサイト:: https://raspimoku.gitlab.io/
+『Raspberry Pi もっと食べたいレシピ集』ダウンロード版のご購入:: pass:[ <A href="https://booth.pm/ja/items/1846990"><img src="https://asset.booth.pm/static-images/banner/200x40_01.png"></a>]
 
+『Raspberry Pi もっと食べたいレシピ集』書籍購入者向け特典版:: pass:[<a href="https://xxx.booth.pm/"><img src="https://asset.booth.pm/static-images/banner/200x40_01.png"></a>]
+
+Raspberry Pi もくもく会のグループ:: Connpass: https://raspberry-pi-moku.connpass.com/ +
+Facebook: https://www.facebook.com/groups/raspimoku/ +
+Slack: https://raspimoku.herokuapp.com/
+
+また、ここで紹介しているシステムは、「enPIT-Pro 早稲田大学スマートエスイー」の講義「 https://smartse.jp/curriculum/k07/[K7 アーキテクチャ] 」の演習課題としても利用しています。
+
+BridgaPointやモデル駆動については、「 https://www.topse.jp/ja/[国立情報学研究所のトップエスイー] 」における「モデル駆動開発」の講義について紹介した、次の記事が参考になるでしょう。
+
+CodeZine - モデル駆動開発におけるモデル変換の役割:: https://codezine.jp/article/detail/10597
 
 == 必要なもの
 
 * Raspberry Pi 本体
-** ここでは、Raspberry Pi 3 Model B+を使用
+** ここでは、Raspberry Pi 3 Model B+を使用。
 * TM1638ボード（または同等品）
 ** 「TM1638 8ビット LEDデジタルチューブ 電子モジュール」といった商品名で販売している。
 ** ネットで1枚数百円から1000円位で購入可能。
@@ -19,8 +37,82 @@ Raspberry Pi もくもく会レシピ集シリーズのサイト:: https://raspi
 *** オープンソースのxtUMLモデリングツール。
 ** GPS Watchのサンプルを作るのに必要。
 ** また、モデルを編集してコードを再生成したい場合に必要。
-* JavaをインストールしたPC
-** 動作させたGPS Watchを、PC上で動いているGUIと連携させるために必要。
+* Javaランタイムを（JRE）をインストールしたPC
+** BridePointや GPS WatchのGUIの動作に必要。
+
+
+BridePointは https://xtuml.org/[xtUML.org] から無償で入手できます。
+最近のインストールに関しては、 https://qiita.com/[Qiita] の記事が参考になるでしょう。
+
+BridgePointのインストール手順（2019年10月以降、Windows10）:: https://qiita.com/kuboaki/items/092253ed9fdcfbcb587f
+
+
+== システムの概要
+
+=== システムの外見
+
+オリジナルのサンプルは、 <<GPSWatch_original>> のような構成です。
+
+[[GPSWatch_original]]
+.オリジナルのGPU Watchの構成と動作の概要
+image::GPSWatch_original_c.png[GPSWatch_original, {full-width}]
+
+Raspberry Pi で作る GPS Watch の完成品は、次のような概観になります。
+
+
+.Raspberry Pi とTM1638ボードで動作している GPS Watch
+image::GPSWatch_raspi_01_c.png[GPSWatch_raspi, {three-quarters-width}]
+
+=== コアデバイスの構造
+
+UMLでモデルを作成するコアデバイスは、次のようなコンポーネント構造になっています。
+
+.GPS Watch システムを構成するコンポーネント（コンポーネント図）
+image::gps_watch_components_merged_c.png[gps_watch_componentsmerged, {three-quarters-width}]
+
+各コンポーネントはクラスの集まりになっており、それぞれのクラスの振舞いはステートマシン図で表します。
+
+.Tracking コンポーネント内部の構造（クラス図）
+image::tracking_comp_classes_merged_c.png[tracking_comp_classes_meged,  {three-quarters-width}]
+
+
+=== コアデバイスの振舞い
+
+.Display クラスの振舞い（ステートマシン図）
+image::display_class_stm_c.png[display_class_stm, {full-width}]
+
+さらに、それぞれの状態ごとの処理（それぞれの状態の中に書いてあるスクリプト）は、モデルの振舞いを記述するための「アクション言語（OAL: Object Action Language）」を使って書きます。
+
+.Displayクラスの displayDistance 状態の振舞いを書いたアクション言語（OAL）のスクリプト
+image::displayDistance_state_c.png[display_distance_state, {full-width}]
+
+OALは、汎用のプログラミング言語から独立した「モデルを操作する」ことに特化した言語です。OALで振舞いが書いてあれば、モデル変換によって C/C++、Java、System-C などで「動く」ソース・コードを生成できます。
+
+
+=== 生成されるソース・コード
+
+モデルを入力として次の工程の成果物を生成するのが、モデルコンパイラの働きです。
+ここでは、MC3020というモデルコンパイラを使っています。
+MC3020は、UMLで作成した構造と振舞いのモデルを入力とし、動作可能な処理を伴う（スケルトンではない）C言語のソース・コードを出力としています。
+
+生成されたソース・コードは 次のような感じになります。暗号のようなコードではなく、手書きのコードに近いことがわかりますね。
+
+.GPS_Watch/src/Tracking_Display_class.h
+[source, c, linenums, start=51]
+----
+include::{sourcesdir}/Tracking_Display_class.h[lines=51..65]
+----
+
+
+.GPS_Watch/src/Tracking_Display_class.c
+[source, c, linenums, start=242]
+----
+include::{sourcesdir}/Tracking_Display_class.c[lines=242..255]
+----
+
+これらに TM1638ボードを接続した Raspberry Pi  動作させるための手書きコードを追加したのが、このリポジトリにあるC言語ソース・コードになります。
+とはいっても、生成したコードは書き換えることはありません。手書きコード用の関数にTM1638ボード用のAPIを書き足すだけです。
+
 
 == 利用方法
 
@@ -48,7 +140,7 @@ Raspberry Pi  と TM1638ボード の接続の詳細図を <<connection_raspi_tm
 [[connection_raspi_tm1638_02]]
 .Raspberry Pi  と TM1638ボード の接続（詳細）
 
-image::connection_raspi_tm1638_02.png[connection_raspi_tm1638_02,{three-quarters-width}]
+image::connection_raspi_tm1638_02_c.png[connection_raspi_tm1638_02,{three-quarters-width}]
 
 接続が済んだら、もう一度確認しておきましょう。
 
@@ -77,7 +169,7 @@ BridgePoint 上で GPS Watch のサンプルは用意できているものとし
 `src` 以下のソースコードを、 Raspberry Pi に転送してくだい。
 
 
-`makefile` は提供されているので、あとはビルドするだけです。
+`Makefile` は提供されているので、あとはビルドするだけです。
 
 
 .Raspberry Pi 向けに調整したGPS Watchをビルドする
@@ -101,7 +193,34 @@ Finished building target: GPS_Watch
 . GUI画面のボタンと TM1638ボード 上のボタンのどちらを操作しても、表示が変化します。
 . ターミナルで `Ctrl-C` を入力して、動作を停止します。
 
-GUI画面と tm1638 ボードの両方から操作できることが確認できるでしょう。
+BridePoint からの操作でGUI画面が起動しない場合は次の手順でコマンドラインからの起動します。
+
+.GUI画面のコマンドラインからの起動方法
+****
+{BP} の更新状況や実行環境によっては、 <<createing_launch_tab_configration_error>> のようなエラーダイアログが表示されて、GUI画面が起動できないことがあります。このようなときは、コマンドプロンプトからGUI画面を起動します。
+
+.コマンドプロンプトからGUI画面を起動する
+[source, console]
+----
+C:\Users\kuboaki\workspace_bp> cd UI\bin  # <1>
+C:\Users\kuboaki\workspace_bp\UI\bin>java lib.WatchGui  # <2>
+Waiting for connection
+Connection received from 127.0.0.1   # <3>
+Connection closed by client.   # <4>
+----
+<1> ワークスペースの `UI` ディレクトリの中の `bin` ディレクトリに移動する。
+<2> WatchGui を起動する。
+<3> 実行後は接続待ちになる。
+<4> 実行後は接続が切れる。
+
+[[createing_launch_tab_configration_error]]
+.GUI画面が起動できないときに表示されるダイアログ
+image::createing_launch_tab_configration_error.png[createing_launch_tab_configration_error,{three-quarters-width}]
+
+****
+
+
+GUI画面と TM1638 ボードの両方から操作できることが確認できるでしょう。
 
 === 動作している様子
 
@@ -120,8 +239,7 @@ https://youtu.be/kNXow7kltDM
 
 == 関連資料
 
-- [[[XTUML]]] Executable UML. Wikipedia. +
-https://en.wikipedia.org/wiki/Executable_UML.
+- [[[XTUML]]] Executable UML. Wikipedia. https://en.wikipedia.org/wiki/Executable_UML.
 - [[[XTUMLORG]]] xtUML.org -- eXecutable Translatable UML with BridgePoint. https://xtuml.org/.
 - [[[BPINST]]] 久保秋. BridgePointのインストール手順. Qiita. http://bit.ly/31oBDl2.
 - [[[ONEFACT]]] One Fact Inc. http://onefact.net/.
