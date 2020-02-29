@@ -2,6 +2,12 @@
 
 このリポジトリにあるのは、 BridgePoint にサンプルとして付属している GPS_Watch プロジェクトをアレンジしたものです。
 
+詳細な実験手順は、『Raspberry Pi もっと食べたいレシピ集（Raspberry Pi もくもく会レシピ集シリーズ Vol. 2）』の 第8章「UMLを使って Raspberry Pi アプリを作る」で説明しています。
+
+
+Raspberry Pi もくもく会レシピ集シリーズのサイト:: https://raspimoku.gitlab.io/
+
+
 == 必要なもの
 
 * Raspberry Pi 本体
@@ -49,15 +55,55 @@ image::connection_raspi_tm1638_02.png[connection_raspi_tm1638_02,{three-quarters
 
 === TM1638ボード用ライブラリのインストール
 
-（あとで書く）
+TM1638ボード を使うアプリケーションを作るには、 TM1638ボード 用のライブラリが必要です。
+
+
+下記Webサイトから BCM2835用のライブラリを入手して、インストールしましょう。付属のドキュメント通りにインストールします。
+
+C library for Broadcom BCM 2835 as used in Raspberry Pi:: {raspi} のGPIO を使うときに必要となるライブラリです。 +
+http://www.airspayce.com/mikem/bcm2835/
+
+下記Webサイトから {tm1638board} 用のライブラリを入手して、インストールしましょう。こちらも、付属のドキュメント通りにインストールします。
+
+TM1638 library for the Raspberry Pi:: {tm1638board} 用のライブラリです。 +
+https://github.com/mjoldfield/pi-tm1638
+
 
 === GPS WatchプログラムをRaspberry Pi上でビルドする
 
-（あとで書く）
+BridgePoint 上で GPS Watch のサンプルは用意できているものとします。
 
-=== 動作を確認する
+このリポジトリのコードは、生成したコードに、 Raspberry Pi と tm1638 ボードを使って動かす部分を追加したものです。
+`src` 以下のソースコードを、 Raspberry Pi に転送してくだい。
 
-（あとで書く）
+
+`makefile` は提供されているので、あとはビルドするだけです。
+
+
+.{raspi} 向けに調整したGPS Watchをビルドする
+[source,console]
+----
+pi@raspi-01:~/Documents/GPS_Watch/Debug $ make all
+（略）
+Finished building target: GPS_Watch
+----
+
+
+=== Raspberry PiでGPS Watch の動作を確認する
+
+ビルドできたら、動かしてみましょう。
+
+
+.{raspi} で動く GPS Watch の起動手順
+. PC側でGUI画面を実行しておきます（この手順はもとのGPS Watchと同じです）。
+. {raspi} のターミナルから、`GPS_Watch` を起動します。
+. PC上のGUI画面や {tm1638board} 上の `START/STOP` ボタンを操作すると、時間を測り始めます。
+. GUI画面のボタンと {tm1638board} 上のボタンのどちらを操作しても、表示が変化します。
+. ターミナルで `Ctrl-C` を入力して、動作を停止します。
+
+GUI画面と tm1638 ボードの両方から操作できることが確認できるでしょう。
+
+
 
 === 動作している様子
 
