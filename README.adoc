@@ -8,7 +8,7 @@
 :half-width: width='50%'
 :half-size:
 :thumbnail: width='60'
-
+include::image_size_matter.adoc[]
 
 = Raspberry PiとTM1638ボードで動かす BridgePointのGPS Watch
 
@@ -63,32 +63,38 @@ BridgePointのインストール手順（2019年10月以降、Windows10）:: htt
 .オリジナルのGPU Watchの構成と動作の概要
 image::GPSWatch_original_c.png[GPSWatch_original, {full-width}]
 
-Raspberry Pi で作る GPS Watch の完成品は、次のような概観になります。
+Raspberry Pi で作る GPS Watch の完成品は、 <<GPSWatch_raspi>> のような概観になります。
 
-
+[[GPSWatch_raspi]]
 .Raspberry Pi とTM1638ボードで動作している GPS Watch
 image::GPSWatch_raspi_01_c.png[GPSWatch_raspi, {three-quarters-width}]
 
 === コアデバイスの構造
 
-UMLでモデルを作成するコアデバイスは、次のようなコンポーネント構造になっています。
+UMLでモデルを作成するコアデバイスは、 <<gps_watch_components_merged>> のようなコンポーネント構造になっています。
 
+[[gps_watch_components_merged]]
 .GPS Watch システムを構成するコンポーネント（コンポーネント図）
 image::gps_watch_components_merged_c.png[gps_watch_componentsmerged, {three-quarters-width}]
 
-各コンポーネントはクラスの集まりになっており、それぞれのクラスの振舞いはステートマシン図で表します。
+各コンポーネントはクラスの集まりになっています。たとえば Tracking コンポーネントのクラス図は <<tracking_comp_classes_merged>> のようになります。
 
+[[tracking_comp_classes_merged]]
 .Tracking コンポーネント内部の構造（クラス図）
 image::tracking_comp_classes_merged_c.png[tracking_comp_classes_meged,  {three-quarters-width}]
 
 
 === コアデバイスの振舞い
 
+それぞれのクラスの振舞いはステートマシン図で表します。たとえば、 Tracking コンポーネントの Display クラスのステートマシン図は <<display_class_stm>> のようになります。
+
+[[display_class_stm]]
 .Display クラスの振舞い（ステートマシン図）
 image::display_class_stm_c.png[display_class_stm, {full-width}]
 
-さらに、それぞれの状態ごとの処理（それぞれの状態の中に書いてあるスクリプト）は、モデルの振舞いを記述するための「アクション言語（OAL: Object Action Language）」を使って書きます。
+さらに、それぞれの状態ごとの処理（それぞれの状態の中に書いてあるスクリプト）は、モデルの振舞いを記述するための「アクション言語（OAL: Object Action Language）」を使って書きます。たとえば、Tracking コンポーネントの Display クラスのステートマシン図の「displayDistance」状態のスクリプトは、 <<display_distance_state>> のようになります。
 
+[[display_distance_state]]
 .Displayクラスの displayDistance 状態の振舞いを書いたアクション言語（OAL）のスクリプト
 image::displayDistance_state_c.png[display_distance_state, {full-width}]
 
@@ -101,24 +107,16 @@ OALは、汎用のプログラミング言語から独立した「モデルを�
 ここでは、MC3020というモデルコンパイラを使っています。
 MC3020は、UMLで作成した構造と振舞いのモデルを入力とし、動作可能な処理を伴う（スケルトンではない）C言語のソース・コードを出力としています。
 
-生成されたソース・コードは 次のような感じになります。暗号のようなコードではなく、手書きのコードに近いことがわかりますね。
+生成されたソース・コードが、 `src` ディレクトリにあるコードです。
+暗号のようなコードではなく、手書きのコードに近いことがわかりますね。
 
-.GPS_Watch/src/Tracking_Display_class.h
-[source, c, linenums, start=51]
-----
-include::{sourcesdir}/Tracking_Display_class.h[lines=51..65]
-----
-
-
-.GPS_Watch/src/Tracking_Display_class.c
-[source, c, linenums, start=242]
-----
-include::{sourcesdir}/Tracking_Display_class.c[lines=242..255]
-----
 
 これらに TM1638ボードを接続した Raspberry Pi  動作させるための手書きコードを追加したのが、このリポジトリにあるC言語ソース・コードになります。
-とはいっても、生成したコードは書き換えることはありません。手書きコード用の関数にTM1638ボード用のAPIを書き足すだけです。
 
+[IMPORTANT]
+--
+注意が必要なのは、生成したコードはスケルトンではなく、実行可能なコードであるということです。手書きコードを追加するのは、モデルと外部との入出力部分の関数にTM1638ボード用のAPIを書き部分だけです。
+--
 
 == 利用方法
 
@@ -221,7 +219,7 @@ Connection closed by client.   # <4>
 
 [[createing_launch_tab_configration_error]]
 .GUI画面が起動できないときに表示されるダイアログ
-image::createing_launch_tab_configration_error.png[createing_launch_tab_configration_error,{three-quarters-width}]
+image::createing_launch_tab_configration_error_c.png[createing_launch_tab_configration_error,{three-quarters-width}]
 
 ****
 
