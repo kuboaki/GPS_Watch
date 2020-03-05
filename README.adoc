@@ -164,7 +164,31 @@ http://www.airspayce.com/mikem/bcm2835/
 TM1638 library for the Raspberry Pi:: TM1638ボード 用のライブラリです。 +
 https://github.com/mjoldfield/pi-tm1638
 
+.Raspberry Pi 4 でコンパイルエラーが発生した場合の対処
+****
+Raspberry Pi 4 では、ライブラリやサンプルの構築時に次のエラーになる。
 
+[source, console]
+----
+gcc -DHAVE_CONFIG_H -I. -I..    -Wall -std=c99 -g -O2 -MT tm1638.o -MD -MP -MF .deps/tm1638.Tpo -c -o tm1638.o tm1638.c
+In file included from tm1638.c:75:
+/usr/local/include/bcm2835.h:643:8: error: unknown type name ‘off_t’
+ extern off_t bcm2835_peripherals_base;
+        ^~~~~
+make[2]: *** [Makefile:291: tm1638.o] エラー 1
+----
+
+対処として、 `bcm2835.h` に `sys/types.h` を追加する。
+
+.`bcm2835.h`（562行目付近）
+[source, c, linenums, start=562]
+----
+#include <stdint.h>
+#include <sys/types.h>   // <1>
+#define BCM2835_VERSION 10062 /* Version 1.62 */
+----
+<1> `sys/types.h` を追加した
+****
 === GPS WatchプログラムをRaspberry Pi上でビルドする
 
 BridgePoint 上で GPS Watch のサンプルは用意できているものとします。
