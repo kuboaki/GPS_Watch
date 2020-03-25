@@ -8,7 +8,6 @@
 :half-width: width='50%'
 :half-size:
 :thumbnail: width='60'
-include::image_size_matter.adoc[]
 
 = Raspberry PiとTM1638ボードで動かす BridgePointのGPS Watch
 
