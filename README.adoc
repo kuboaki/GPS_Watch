@@ -47,10 +47,10 @@ CodeZine - モデル駆動開発におけるモデル変換の役割:: https://c
 
 
 BridePointは https://xtuml.org/[xtUML.org] から無償で入手できます。
-最近のインストールに関しては、 https://qiita.com/[Qiita] の記事が参考になるでしょう。
+最近のインストールに関しては、次のQiitaの記事が参考になるでしょう。
 
-BridgePointのインストール手順（2019年10月以降、Windows10）:: https://qiita.com/kuboaki/items/092253ed9fdcfbcb587f
-
+* https://qiita.com/kuboaki/items/092253ed9fdcfbcb587f[BridgePointのインストール手順（2019年10月以降、Windows）] 
+* https://qiita.com/kuboaki/items/adc2ee6bad2e8ab607ca[BridgePointのインストール手順（2019年10月以降、macOS）] 
 
 == システムの概要
 
