@@ -264,6 +264,7 @@ https://youtu.be/kNXow7kltDM
 
 これまで BeridgePoint の開発、販売、コミュニティ支えてきた全てのみなさんに感謝します。とりわけ、 Levi Starrett氏には、スマートエスイーで Raspberry Pi  を使うにあたって、 xtUML Days 2018 ^<<XTUML2018>>^ での発表資料 ^<<LAVI-PDF>>^ , ^<<LAVI-V>>^ を利用することに快諾いただきました。一層の謝意を表します。
 
+[bibliography]
 == 関連資料
 
 - [[[XTUML]]] Executable UML. Wikipedia. https://en.wikipedia.org/wiki/Executable_UML.
