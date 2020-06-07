@@ -15,7 +15,7 @@ BridgePoint にサンプルとして付属している GPS_Watch プロジェク
 
 == 関連する記事や講義について
 
-モデルからこのリポジトリにあるソース・コードを生成し、 Raspberry Piで動作させるまでの詳しい手順は、『 https://raspimoku.gitlab.io/recipebook02/[Raspberry Pi もっと食べたいレシピ集] 』の 第8章「UMLを使って Raspberry Pi アプリを作る」で紹介しています。
+モデルからこのリポジトリにあるソース・コードを生成し、 Raspberry Piで動作させるまでの詳しい手順は、『 https://raspimoku.gitlab.io/recipebook02.html[Raspberry Pi もっと食べたいレシピ集] 』の 第8章「UMLを使って Raspberry Pi アプリを作る」で紹介しています。
 
 『Raspberry Pi もっと食べたいレシピ集』ダウンロード版のご購入:: pass:[ <A href="https://booth.pm/ja/items/1846990"><img src="https://asset.booth.pm/static-images/banner/200x40_01.png"></a>]
 
