@@ -19,7 +19,7 @@ BridgePoint にサンプルとして付属している GPS_Watch プロジェク
 
 『Raspberry Pi もっと食べたいレシピ集』ダウンロード版のご購入:: pass:[ <A href="https://booth.pm/ja/items/1846990"><img src="https://asset.booth.pm/static-images/banner/200x40_01.png"></a>]
 
-『Raspberry Pi もっと食べたいレシピ集』書籍購入者向け特典版:: pass:[<a href="https://xxx.booth.pm/"><img src="https://asset.booth.pm/static-images/banner/200x40_01.png"></a>]
+『Raspberry Pi もっと食べたいレシピ集』書籍購入者向け特典版:: pass:[<a href="https://raspimoku.booth.pm/items/1873666"><img src="https://asset.booth.pm/static-images/banner/200x40_01.png"></a>]
 
 Raspberry Pi もくもく会のグループ:: Connpass: https://raspberry-pi-moku.connpass.com/ +
 Facebook: https://www.facebook.com/groups/raspimoku/ +
