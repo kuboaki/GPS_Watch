@@ -1,7 +1,10 @@
 
 :imagesdir: images
 :souecesdir: src
-
+:figure-caption: 図
+:table-caption: 表
+:example-caption: 例
+:xrefstyle: short
 :twoinches: width='360'
 :full-width: width='100%'
 :three-quarters-width: width='75%'
@@ -62,13 +65,16 @@ BridePointは https://xtuml.org/[xtUML.org] から無償で入手できます。
 .オリジナルのGPU Watchの構成と動作の概要
 image::GPSWatch_original_c.png[GPSWatch_original, {full-width}]
 
---
+---
+
 Raspberry Pi で作る GPS Watch の完成品は、 <<GPSWatch_raspi>> のような概観になります。
---
+
 
 [[GPSWatch_raspi]]
 .Raspberry Pi とTM1638ボードで動作している GPS Watch
 image::GPSWatch_raspi_01_c.png[GPSWatch_raspi, {three-quarters-width}]
+
+---
 
 === コアデバイスの構造
 
@@ -78,15 +84,16 @@ UMLでモデルを作成するコアデバイスは、 <<gps_watch_components_me
 .GPS Watch システムを構成するコンポーネント（コンポーネント図）
 image::gps_watch_components_merged_c.png[gps_watch_componentsmerged, {three-quarters-width}]
 
---
+---
+
 各コンポーネントはクラスの集まりになっています。たとえば Tracking コンポーネントのクラス図は <<tracking_comp_classes_merged>> のようになります。
---
+
 
 [[tracking_comp_classes_merged]]
 .Tracking コンポーネント内部の構造（クラス図）
 image::tracking_comp_classes_merged_c.png[tracking_comp_classes_meged,  {three-quarters-width}]
 
-
+---
 === コアデバイスの振舞い
 
 それぞれのクラスの振舞いはステートマシン図で表します。たとえば、 Tracking コンポーネントの Display クラスのステートマシン図は <<display_class_stm>> のようになります。
@@ -95,17 +102,18 @@ image::tracking_comp_classes_merged_c.png[tracking_comp_classes_meged,  {three-q
 .Display クラスの振舞い（ステートマシン図）
 image::display_class_stm_c.png[display_class_stm, {full-width}]
 
---
+---
 さらに、それぞれの状態ごとの処理（それぞれの状態の中に書いてあるスクリプト）は、モデルの振舞いを記述するための「アクション言語（OAL: Object Action Language）」を使って書きます。たとえば、Tracking コンポーネントの Display クラスのステートマシン図の「displayDistance」状態のスクリプトは、 <<display_distance_state>> のようになります。
---
+
 
 [[display_distance_state]]
 .Displayクラスの displayDistance 状態の振舞いを書いたアクション言語（OAL）のスクリプト
 image::displayDistance_state_c.png[display_distance_state, {full-width}]
 
---
+---
+
 OALは、汎用のプログラミング言語から独立した「モデルを操作する」ことに特化した言語です。OALで振舞いが書いてあれば、モデル変換によって C/C++、Java、System-C などで「動く」ソース・コードを生成できます。
---
+
 
 === 生成されるソース・コード
 
@@ -152,9 +160,10 @@ Raspberry Pi  と TM1638ボード の接続の詳細図を <<connection_raspi_tm
 
 image::connection_raspi_tm1638_02_c.png[connection_raspi_tm1638_02,{three-quarters-width}]
 
---
+---
+
 接続が済んだら、もう一度確認しておきましょう。
---
+
 
 === TM1638ボード用ライブラリのインストール
 
@@ -248,14 +257,14 @@ Connection closed by client.   # <4>
 <3> 実行後は接続待ちになる。
 <4> 実行後は接続が切れる。
 
+
+GUI画面と TM1638 ボードの両方から操作できることが確認できるでしょう。
+
 [[createing_launch_tab_configration_error]]
 .GUI画面が起動できないときに表示されるダイアログ
 image::createing_launch_tab_configration_error_c.png[createing_launch_tab_configration_error,{three-quarters-width}]
 
 ****
-
-
-GUI画面と TM1638 ボードの両方から操作できることが確認できるでしょう。
 
 === 動作している様子
 
