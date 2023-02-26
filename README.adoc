@@ -49,8 +49,8 @@ CodeZine - モデル駆動開発におけるモデル変換の役割:: https://c
 BridePointは https://xtuml.org/[xtUML.org] から無償で入手できます。
 最近のインストールに関しては、次のQiitaの記事が参考になるでしょう。
 
-* https://qiita.com/kuboaki/items/092253ed9fdcfbcb587f[BridgePointのインストール手順（2019年10月以降、Windows）] 
-* https://qiita.com/kuboaki/items/adc2ee6bad2e8ab607ca[BridgePointのインストール手順（2019年10月以降、macOS）] 
+* https://qiita.com/kuboaki/items/092253ed9fdcfbcb587f[BridgePointのインストール手順（2019年10月以降、Windows）]
+* https://qiita.com/kuboaki/items/adc2ee6bad2e8ab607ca[BridgePointのインストール手順（2019年10月以降、macOS）]
 
 == システムの概要
 
@@ -62,7 +62,9 @@ BridePointは https://xtuml.org/[xtUML.org] から無償で入手できます。
 .オリジナルのGPU Watchの構成と動作の概要
 image::GPSWatch_original_c.png[GPSWatch_original, {full-width}]
 
+--
 Raspberry Pi で作る GPS Watch の完成品は、 <<GPSWatch_raspi>> のような概観になります。
+--
 
 [[GPSWatch_raspi]]
 .Raspberry Pi とTM1638ボードで動作している GPS Watch
@@ -76,7 +78,9 @@ UMLでモデルを作成するコアデバイスは、 <<gps_watch_components_me
 .GPS Watch システムを構成するコンポーネント（コンポーネント図）
 image::gps_watch_components_merged_c.png[gps_watch_componentsmerged, {three-quarters-width}]
 
+--
 各コンポーネントはクラスの集まりになっています。たとえば Tracking コンポーネントのクラス図は <<tracking_comp_classes_merged>> のようになります。
+--
 
 [[tracking_comp_classes_merged]]
 .Tracking コンポーネント内部の構造（クラス図）
@@ -91,14 +95,17 @@ image::tracking_comp_classes_merged_c.png[tracking_comp_classes_meged,  {three-q
 .Display クラスの振舞い（ステートマシン図）
 image::display_class_stm_c.png[display_class_stm, {full-width}]
 
+--
 さらに、それぞれの状態ごとの処理（それぞれの状態の中に書いてあるスクリプト）は、モデルの振舞いを記述するための「アクション言語（OAL: Object Action Language）」を使って書きます。たとえば、Tracking コンポーネントの Display クラスのステートマシン図の「displayDistance」状態のスクリプトは、 <<display_distance_state>> のようになります。
+--
 
 [[display_distance_state]]
 .Displayクラスの displayDistance 状態の振舞いを書いたアクション言語（OAL）のスクリプト
 image::displayDistance_state_c.png[display_distance_state, {full-width}]
 
+--
 OALは、汎用のプログラミング言語から独立した「モデルを操作する」ことに特化した言語です。OALで振舞いが書いてあれば、モデル変換によって C/C++、Java、System-C などで「動く」ソース・コードを生成できます。
-
+--
 
 === 生成されるソース・コード
 
@@ -145,8 +152,9 @@ Raspberry Pi  と TM1638ボード の接続の詳細図を <<connection_raspi_tm
 
 image::connection_raspi_tm1638_02_c.png[connection_raspi_tm1638_02,{three-quarters-width}]
 
+--
 接続が済んだら、もう一度確認しておきましょう。
-
+--
 
 === TM1638ボード用ライブラリのインストール
 
