@@ -12,6 +12,8 @@
 :half-size:
 :thumbnail: width='60'
 
+:sectnums:
+
 = Raspberry PiとTM1638ボードで動かす BridgePointのGPS Watch
 
 BridgePoint にサンプルとして付属している GPS_Watch プロジェクトを、TM1638ボードを接続した Raspberry Pi で動かすためにアレンジしました。
